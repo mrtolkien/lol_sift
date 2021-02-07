@@ -1,8 +1,11 @@
 [tool.poetry]
-name = "lol_surf"
-version = "0.1.0"
+name = "lol_sift"
+version = "1.0.0"
 description = ""
 authors = ["mrtolkien <gary.mialaret@gmail.com>"]
+
+[tool.poetry.scripts]
+select_champion = "lol_sift.app:app"
 
 [tool.poetry.dependencies]
 python = "^3.9"
@@ -10,6 +13,8 @@ opencv-python = "^4.5.1"
 PyAutoGUI = "^0.9.52"
 Pillow = "^8.1.0"
 lol-id-tools = "^1.7.1"
+typer = {extras = ["all"], version = "^0.3.2"}
+lcu-driver = "^2.1.3"
 
 [tool.poetry.dev-dependencies]
 

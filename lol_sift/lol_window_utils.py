@@ -43,3 +43,6 @@ def get_champion_select_image() -> numpy.ndarray:
 
     # Finally, we revert the array as it’s read in RGB but cv2 wants BGR
     return lol_screenshot_array[:, :, ::-1]
+
+##
+
