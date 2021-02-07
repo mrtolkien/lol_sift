@@ -1,3 +1,5 @@
+import time
+
 import typer
 import pyautogui
 import lol_id_tools
@@ -39,6 +41,9 @@ def select_champion(
         # Selecting the LoL window then scrolling very far up to make sure we’re at the beginning of the champion select
         select_lol_window()
         pyautogui.scroll(120 * 5 * 10)
+        select_lol_window()
+
+        time.sleep(.1)  # To reduce bugs when we move too fast
 
         tries = 0
         result = None  # To not get weak warnings
