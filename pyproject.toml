@@ -7,6 +7,8 @@ authors = ["mrtolkien <gary.mialaret@gmail.com>"]
 [tool.poetry.dependencies]
 python = "^3.9"
 opencv-python = "^4.5.1"
+PyAutoGUI = "^0.9.52"
+Pillow = "^8.1.0"
 
 [tool.poetry.dev-dependencies]
 
