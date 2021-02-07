@@ -9,6 +9,7 @@ python = "^3.9"
 opencv-python = "^4.5.1"
 PyAutoGUI = "^0.9.52"
 Pillow = "^8.1.0"
+lol-id-tools = "^1.7.1"
 
 [tool.poetry.dev-dependencies]
 

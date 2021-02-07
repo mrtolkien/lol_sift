@@ -6,11 +6,18 @@ import pyautogui
 lol_window = pyautogui.getWindowsWithTitle("League of Legends")[0]
 
 
-def click_lol_window():
+def select_lol_window():
     """
     Clicks the LoL window in the center (gets focus)
     """
     pyautogui.click(lol_window.center.x, lol_window.center.y)
+
+
+def click_champion_select(champion_select_coordinates):
+    pyautogui.click(
+        lol_window.left + 1280 / 2 - 590 / 2 + champion_select_coordinates[0],
+        lol_window.top + 720 / 2 - 470 / 2 + champion_select_coordinates[1],
+    )
 
 
 def get_champion_select_image() -> numpy.ndarray:
@@ -19,9 +26,6 @@ def get_champion_select_image() -> numpy.ndarray:
 
     On a 1280*720 client, champion select is 590*470, centered
     """
-    # Select the right window for the screenshot
-    click_lol_window()
-
     # Screenshot the LoL window only
     pyautogui.hotkey("alt", "prtscr")
 
