@@ -1,4 +1,4 @@
-from lol_surf.lol_window_utils import *
+from lol_sift.lol_window_utils import *
 import cv2
 
 select_lol_window()
