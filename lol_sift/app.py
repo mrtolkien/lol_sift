@@ -33,9 +33,8 @@ def select_champion(
 
     for champion_name in champion_names.split(","):
         # Cleaning up the champion name to have the exact Riot nomenclature
-        champion_name = lol_id_tools.get_translation(
-            champion_name, object_type="champion"
-        )
+        champion_id = lol_id_tools.get_id(champion_name, object_type="champion")
+        champion_name = lol_id_tools.get_name(champion_id, object_type="champion")
 
         # Selecting the LoL window then scrolling very far up to make sure we’re at the beginning of the champion select
         select_lol_window()
