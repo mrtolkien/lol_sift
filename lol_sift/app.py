@@ -30,48 +30,62 @@ def select_champion(
 
     if not champion_names:
         champion_names = typer.prompt(
-            "Please enter the names of the champion you want to click, separated by commas"
+            "Please enter the names of the champions you want to click, separated by commas"
         )
+
+    # Selecting the LoL window then scrolling very far up to make sure we’re at the beginning of the champion select
+    select_lol_window()
+    pyautogui.scroll(120 * 5 * 10)
+
+    clean_champion_names = set()
 
     for champion_name in champion_names.split(","):
         # Cleaning up the champion name to have the exact Riot nomenclature
         champion_id = lol_id_tools.get_id(champion_name, object_type="champion")
-        champion_name = lol_id_tools.get_name(champion_id, object_type="champion")
+        clean_champion_names.add(
+            lol_id_tools.get_name(champion_id, object_type="champion")
+        )
 
-        # Selecting the LoL window then scrolling very far up to make sure we’re at the beginning of the champion select
-        select_lol_window()
-        pyautogui.scroll(120 * 5 * 10)
-        select_lol_window()
+    start_time = datetime.now()
 
-        time.sleep(.1)  # To reduce bugs when we move too fast
+    tries = 0
+    champions_found = set()
 
-        tries = 0
-        result = None  # To not get weak warnings
-        start_time = datetime.now()
+    while clean_champion_names and tries < 7:
 
-        while tries < 7:
+        for champion_name in clean_champion_names:
+            if champion_name in champions_found:
+                continue
+
             img = get_champion_select_image()
             result = find_champion_in_picture(champion_name, img)
 
             if result is not None:
+                champions_found.add(champion_name)
                 click_champion_select(result)
                 typer.secho(
-                    f"\t{champion_name} was found in {(datetime.now()-start_time).total_seconds()}s",
+                    f"\t{champion_name} found",
                     fg=typer.colors.GREEN,
                 )
-                break
+                time.sleep(1/60)  # To reduce bugs when we move too fast
 
-            else:
-                # We scroll down
-                pyautogui.scroll(-120 * 5)
-                tries += 1
+        # We scroll down roughly 1 screen
+        pyautogui.scroll(-100 * 5)
 
-        # If we existed and result is still None, something went wrong
-        if result is None:
-            typer.secho(
-                f"{champion_name} not found, were you properly in champion select?",
-                fg=typer.colors.RED,
-            )
+        # Ensures we stop when at the bottom of the champion select
+        tries += 1
+
+    # If we exited and result is still None, something went wrong
+    if len(champions_found) != len(clean_champion_names):
+        typer.secho(
+            f"{', '.join([c for c in clean_champion_names if c not in champions_found])} not found",
+            fg=typer.colors.RED,
+        )
+
+    typer.secho(
+        f"Search finished in {(datetime.now()-start_time).total_seconds()}s",
+        fg=typer.colors.GREEN,
+    )
 
 
 # Simple testing by running the file

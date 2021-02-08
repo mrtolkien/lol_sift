@@ -5,7 +5,7 @@ description = ""
 authors = ["mrtolkien <gary.mialaret@gmail.com>"]
 
 [tool.poetry.scripts]
-select_champion = "lol_sift.app:app"
+select = "lol_sift.app:app"
 
 [tool.poetry.dependencies]
 python = "^3.9"
