@@ -48,10 +48,10 @@ def select_champion(
 
     start_time = datetime.now()
 
-    tries = 0
     champions_found = set()
 
-    while clean_champion_names and tries < 7:
+    # Enough tries to do the whole champion select
+    for tries in range(7):
 
         for champion_name in clean_champion_names:
             if champion_name in champions_found:
@@ -67,13 +67,10 @@ def select_champion(
                     f"\t{champion_name} found",
                     fg=typer.colors.GREEN,
                 )
-                time.sleep(1/60)  # To reduce bugs when we move too fast
+                time.sleep(1 / 60)  # To reduce bugs when we move too fast
 
         # We scroll down roughly 1 screen
         pyautogui.scroll(-100 * 5)
-
-        # Ensures we stop when at the bottom of the champion select
-        tries += 1
 
     # If we exited and result is still None, something went wrong
     if len(champions_found) != len(clean_champion_names):
