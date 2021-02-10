@@ -67,7 +67,7 @@ def find_champion_in_picture(
         total_distance_from_median += np.linalg.norm(row - median)
 
     # Ezreal, a "hard match", is still bellow 200 on a partial image
-    if total_distance_from_median > 500:
+    if total_distance_from_median > 400:
         return None
     else:
         return median

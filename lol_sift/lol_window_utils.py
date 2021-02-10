@@ -16,7 +16,7 @@ def select_lol_window():
 def click_champion_select(champion_select_coordinates):
     pyautogui.click(
         lol_window.left + 1280 / 2 - 590 / 2 + champion_select_coordinates[0],
-        lol_window.top + 720 / 2 - 470 / 2 + champion_select_coordinates[1],
+        lol_window.top + 720 / 2 - 480 / 2 + champion_select_coordinates[1],
     )
 
 

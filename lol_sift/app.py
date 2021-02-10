@@ -67,7 +67,10 @@ def select_champion(
                     f"\t{champion_name} found",
                     fg=typer.colors.GREEN,
                 )
-                time.sleep(1 / 60)  # To reduce bugs when we move too fast
+                time.sleep(.1)  # To reduce bugs when we move too fast
+
+        if len(champions_found) == len(clean_champion_names):
+            break
 
         # We scroll down roughly 1 screen
         pyautogui.scroll(-100 * 5)
